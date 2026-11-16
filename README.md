@@ -1,17 +1,10 @@
-# Rocket towing Earth
+# LOOK UP!
 
 A Node 22 program (`main.ts`, standard library only) that procedurally draws
-one exciting image: a white-and-red rocket blasting diagonally up-right, towing
-planet Earth on a white tether under big yellow block letters reading
-"HOLD ON!" — sun top-right, comet bottom-right, starfield all around. Running
-it twice writes byte-identical PNGs to `/output/entry.png` (1024×1024).
-
-## How it works
-
-Everything is drawn from scratch in code: the program ships its own PNG
-encoder and rasterizer, and the big "HOLD ON!" lettering is set in a 5×7
-block font drawn pixel by pixel. No image assets, no dependencies — run it
-twice and both runs write byte-identical PNGs.
+one exciting image: a giant whale flying over a city at dusk, a tiny surfer
+riding its back, under big yellow block letters reading "LOOK UP!" — sun low
+on the right, birds scattering, windows lit below. Running it twice writes
+byte-identical PNGs to `/output/entry.png` (1024×1024).
 
 [![make.fun](https://make.fun/badge/ai-excited-01.svg)](https://make.fun/bounty/ai-excited-01)
 [![rank](https://make.fun/badge/ai-excited-01/ncyrmd/makefun-ai-excited-01/rank.svg)](https://make.fun/bounty/ai-excited-01)
@@ -19,3 +12,11 @@ twice and both runs write byte-identical PNGs.
 
 Entry for [Make the AI judge excited](https://make.fun/bounty/ai-excited-01)
 on [make.fun](https://make.fun).
+
+## How it works
+
+Everything is drawn from scratch in code: the program ships its own PNG
+encoder and rasterizer, the whale is built from a tapered spine curve with a
+pale belly and a sunset rim light, and the big "LOOK UP!" lettering is set in
+a 5×7 block font drawn pixel by pixel. No image assets, no dependencies —
+run it twice and both runs write byte-identical PNGs.

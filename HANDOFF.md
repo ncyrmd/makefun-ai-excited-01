@@ -1,63 +1,54 @@
-# ai-excited-01 v1 — HANDOFF
+# ai-excited-01 v2 — HANDOFF
 
-Code commit: `c98cdb005e77d0181a5f1fb7ed4f13ed1336cd8b` ("v1: rocket towing Earth")
+## Why v2 exists
+v1 "Rocket towing Earth" (submission 01a1e23f, submitted 09:45 WIB 16 Nov)
+FAILED server-side at 10:20 WIB: status went 'preparing' → 'failed' with
+error null, scores [], runs []. Authorship was fine (97.5% authored).
+Diagnosis: v1's main.ts re-runs locally perfectly — two runs byte-identical
+(sha256 268f3a9565ef8205871828038b1cd4e4c2b733c9ec4eb0f20046e756b204f302,
+173,402 bytes, 1024x1024, ~2 s per run). Nothing in the program hangs,
+crashes, or depends on the clock/network. Best guess: a platform-side flake
+(the server spent ~17 min, build_wall_ms 1012124, then failed with no
+reason). v2 is a FRESH program with a different scene, kept deliberately
+simple and fast (~0.6 s a run) to minimise anything that could trip the
+grader; it shares no bytes with v1.
 
-## Image concept (3 lines)
-A white-and-red rocket blasts diagonally up-right across a starfield, its
-three-layer flame roaring, towing the whole planet Earth behind it on a
-white tether tied to its fin — under the big yellow block letters HOLD ON!
-A glowing sun burns top-right, a comet dives in bottom-right, and a tiny
-astronaut watches from the rocket's porthole window.
+## Image concept — "LOOK UP!"
+A giant whale flies diagonally up-right over a city at dusk, a tiny surfer
+in cream silhouette riding its back with one arm raised, under the big
+yellow block letters "LOOK UP!". A low sun burns bottom-right with a soft
+glow, birds scatter, the city skyline below has lit windows and rooftop
+antennas. The whale is built from a tapered spine curve: dark blue back,
+pale belly underneath, a thin orange sunset rim along its top edge, tail
+flukes sweeping back-left, a small spout of droplets above its head.
+Surprise: the scale twist — a whale in the sky, ridden like a surfboard.
+Reads small: one huge diagonal whale + giant letters + sun + skyline.
 
-## Output stats
-- File: `entry.png`, 1024x1024, RGBA PNG, **173,689 bytes** (limit 1,048,576)
-- sha256: `4f33169781c258f027cdfcaead0ca571c9508c402babae8137966217a6fff236`
-- Two-run byte-identical check: PASS — two separate runs
-  (`MAKEFUN_OUTPUT_DIR=out1` / `out2`, `node main.ts`) produced identical
-  sha256 hashes. Deterministic: fixed mulberry32 seed, no clock, no env
-  variation (only the kit's output-dir variable). Runtime ~2 s per run.
+## What was built (all written fresh in-session)
+- main.ts — own PNG encoder (zlib deflate via stdlib), own rasterizer
+  (pixel buffer, blend, line, circle, ellipse, polygon fill, vertical
+  gradient, glow), own 5x7 block font (L, O, K, U, P, !), seeded
+  mulberry32 RNG. No network, no clock, no dependencies.
+- LICENSE — MIT, SPDX-License-Identifier: MIT first line.
+- README.md — title, description, How it works, the 3 live make.fun badges
+  for ncyrmd / makefun-ai-excited-01, bounty-page links.
+- .makefun/owner.json — {"wallet":"8XAaVLzayVRZmexspxLZzs5hcM4a8wm5bMBJYa9MgkGE"} (57 bytes).
 
-## What I saw when I viewed the image
-- Full size: clean bold vector-style scene. "HOLD ON!" reads perfectly in
-  large yellow block letters with a dark outline; the rocket is the dominant
-  shape, white body with red nose tip, red bands and red fins; the layered
-  orange/yellow/white flame is bright and clearly separated from the body;
-  Earth (blue ocean, green continents, white clouds) sits bottom-left with
-  the white tether curving visibly up to the rocket's left fin; sun top-right
-  with a warm glow; comet bottom-right with a pale tail.
-- At 300px (downscaled check): the idea still reads at a glance — text,
-  rocket diagonal, flame, Earth circle and tether are all clear.
+## Tests (as the grader would)
+- Ran main.ts twice: byte-identical PNGs.
+  sha256 58c890bb73fbcae020717a6c3307700852c7915b0d9a3235c9a24cc2606d4943
+  49,514 bytes, 1024x1024, valid PNG magic, ~0.6 s per run, exit 0.
+- Viewed the PNG at full size and checked it as the judge would:
+  first version read as a blimp (belly/rim bands inverted, flat clouds,
+  spout like a crown, dark surfer lost on the dark back). Fixed in a
+  second pass: belly moved to the underside, rim light thinned to the
+  top edge only, clouds made faint, spout reduced to droplets, surfer
+  redrawn in cream and slightly larger, tail flukes enlarged. Re-ran
+  twice, byte-identical again, re-viewed: reads clearly as a whale.
+- Kit check: `node cli/makefun.mjs check --kit . --repo .` →
+  4 passed, 0 failed, 15 skipped, 5 checked at submission.
 
-## Polish pass (in-session, after the recording started)
-- Porthole fix: the old helmet + offset visor inside the window read as a
-  giant cartoon eye at full size. Replaced with a clean round glass window
-  — dark navy disc [14,28,66] inside the silver ring, with a small white
-  crescent highlight tucked at its upper-left edge (white disc re-covered
-  by a navy disc offset down-right). No astronaut, no pupil, no face.
-  Concept line above ("astronaut watches from the porthole") no longer
-  applies; the known-defect bullet about the eye/visor is fixed by this.
-- Re-verified like the grader: two runs (`MAKEFUN_OUTPUT_DIR=/tmp/exc-polish1`
-  / `/tmp/exc-polish2`, `node main.ts`) byte-identical, sha256
-  `268f3a9565ef8205871828038b1cd4e4c2b733c9ec4eb0f20046e756b204f302`,
-  173,402 bytes (≤1 MiB), 1024x1024. Viewed full size and a 3x zoom of the
-  window: the disc reads as glass with a crescent glint, everything else
-  (rocket, flame, tether, Earth, text, sun, comet, starfield) unchanged.
-
-## Revision history
-- v1 draft: tether attached near the tail and was hidden behind the flame,
-  so it looked like the flame was towing Earth; nebula blobs were flat
-  hard-edged ellipses that read as stickers.
-- Fixed in a second edit pass: tether re-routed to a lug on the left fin
-  (clear of the flame), nebula blobs replaced with soft radial glows, comet
-  added to fill the empty lower-right, astronaut visor enlarged slightly.
-  Re-ran twice, re-verified byte-identical, re-viewed at full size and 300px.
-
-## Known defects
-- The tether passes close to the flame's left edge mid-curve (clear of it,
-  but only by ~20px at one point) — at a glance it could briefly read as
-  touching the flame.
-- The astronaut in the porthole is tiny; the offset visor makes a crescent
-  shape that reads more like an eye/moon than a helmet at full size.
-- Middle-right of the frame is relatively empty (stars and speed streaks
-  only) — deliberate breathing room, but a denser field would be busier.
-- The "!" sits close to the sun's glow (no overlap, ~7px gap).
+## State
+Built and committed locally only. NOT pushed, NOT submitted, recording
+untouched. Parent to push (browser upload) and submit with the live
+recording id.
