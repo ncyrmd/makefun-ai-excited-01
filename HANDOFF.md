@@ -52,3 +52,52 @@ Reads small: one huge diagonal whale + giant letters + sun + skyline.
 Built and committed locally only. NOT pushed, NOT submitted, recording
 untouched. Parent to push (browser upload) and submit with the live
 recording id.
+
+---
+
+# ai-excited-01 v3 — HANDOFF
+
+## Why v3 exists
+v2 "LOOK UP!" dev grade 89.93% (8W/2D/2L), projected rank ~926-936,
+top-20 cutoff ~97.07% — far outside paid. Per the gas-terus rule, v3 is a
+FRESH concept built for the last (reserve) submission slot, ahead of the
+06:00 WIB Tue 17 Nov deadline.
+
+## Image concept — "DISCO MOON!"
+The moon is a giant mirrored disco ball hanging on a chain over a tiny
+city, sweeping five coloured light beams (pink, cyan, gold, violet, lime)
+down onto rooftop dancers, under big gold block letters "DISCO MOON!".
+Surprise: the scale twist — a nightclub mirror ball the size of the moon.
+Reads small: one huge tiled circle + gold title + skyline + beams.
+
+## What was built (all written fresh in-session)
+- main.ts — own PNG encoder (zlib deflate via stdlib), own rasterizer
+  (pixel buffer, blend, circle, polygon fill, thick lines, gradient),
+  own 5x7 block font (D, I, S, C, O, M, N, !), seeded mulberry32 RNG.
+  No network, no clock, no dependencies.
+- LICENSE — MIT, SPDX-License-Identifier: MIT first line, copyright line
+  names the v3 entry.
+- README.md — title, description, How it works, Why it should excite
+  the judge, the 3 live make.fun badges for ncyrmd / makefun-ai-excited-01.
+- .makefun/owner.json — unchanged
+  {"wallet":"8XAaVLzayVRZmexspxLZzs5hcM4a8wm5bMBJYa9MgkGE"}.
+
+## Tests (as the grader would)
+- Ran main.ts twice: byte-identical PNGs.
+  sha256 366a59375d4ac138af95883d1d57c30feeded829290d045dbb101a048e21b4c7
+  94,301 bytes, 1024x1024, valid PNG magic, ~0.5 s per run, exit 0.
+- Viewed the PNG at full size and at 300px: first version read "OISCO"
+  (D glyph identical to O), the ball crowded the title, beams nearly
+  invisible, dancers on the far-right roof. Fixed in a second pass:
+  D glyph given a flat left edge, ball moved down (centre 640,375, r 225),
+  beams doubled (wide wash + bright core, higher alpha), party moved to
+  the tallest building under the beams. Re-ran twice, byte-identical
+  again, re-viewed: "DISCO MOON!" legible, disco ball unmistakable,
+  beams visible, reads clearly at 300px.
+- Kit check on the v3 commit 60c0f96: `node cli/makefun.mjs check --kit . --repo .` →
+  4 passed, 0 failed, 15 skipped, 5 checked at submission (exit 0).
+
+## State
+Built and committed locally only. NOT pushed, NOT submitted, recording
+untouched. Parent to push (browser upload) and submit with the live
+recording id 01a1e5f4-4deb-7107-bf42-203a25b96613.
